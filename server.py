@@ -50,7 +50,7 @@ and some cleanup is done to remove his/her information.
 """
 def handleClient(client):
     name = client.recv(BUFFSIZE).decode("utf8")
-    client.send(bytes("Welcome %s, type 'exit' to exit the chat" % name,'utf8'))
+    client.send(bytes("Welcome %s" % name,'utf8'))
     msg = '%s has joined the chat' % name
     broadcast(bytes(msg, 'utf8'))
     clients[client] = name
