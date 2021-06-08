@@ -52,17 +52,18 @@ if __name__ == '__main__':
     messageFrame.pack()
 
     myMsg = tkinter.StringVar()
-    myMsg.set("Click to type")
+    myMsg.set("Klicken, um zu schreiben")
     entryField = tkinter.Entry(top,textvariable = myMsg)
     entryField.bind("<Return>", send)
     entryField.pack()
-    sendButton = tkinter.Button(top, text = 'Send', command = send, height = 1, width = 7)
+    sendButton = tkinter.Button(top, text = 'Senden', command = send, height = 1, width = 7)
+    sendButton = tkinter.Button(top, text='Verlassen', command = cleanAndClose, height = 1, width = 7)
     sendButton.pack()
 
     top.protocol("WM_DELETE_WINDOW", cleanAndClose)
 
-    HOST = input('Enter HOST IP Address: ')
-    PORT = input('Enter PORT number: ')
+    HOST = input('Geben Sie die HOST-Adresse ein: ')
+    PORT = input('Geben Sie die PORT-Nummer ein: ')
     PORT = 5545 if not PORT else int(PORT)
 
     BUFFSIZE = 1024
