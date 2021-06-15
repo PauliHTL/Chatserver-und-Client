@@ -26,9 +26,6 @@ def send(event=None):
     myMsg.set("")
     clientSocket.send(bytes(msg,'utf8'))
 
-"""
-If the exit sequence is entered, this function is executed.
-"""
 def cleanAndClose(event=None):
     myMsg.set("'exit'")
     send()
