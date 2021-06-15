@@ -1,7 +1,6 @@
+import tkinter
 from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
-import tkinter
-
 
 """
 The below function gets the latest messages from the server and inserts it into the Listbox object.
@@ -32,6 +31,14 @@ def cleanAndClose(event=None):
     top.destroy()
     stop = True
 
+def Resize_Image(image, maxsize):
+    r1 = tk.image.size[0]/maxsize[0]
+    r2 = tk.image.size[1]/maxsize[1]
+    ratio = max(r1, r2)
+    newsize = (int(tk.image.size[0]/ratio), int(tk.image.size[1]/ratio))
+    image = tk.image.resize(newsize, tk.Image.ANTIALIAS)
+    return image
+
 if __name__ == '__main__':
     top = tkinter.Tk()
     top.title('ChatRoom')
@@ -49,9 +56,18 @@ if __name__ == '__main__':
     entryField = tkinter.Entry(top,textvariable = myMsg)
     entryField.bind("<Return>", send)
     entryField.pack()
-    sendButton = tkinter.Button(top, text = 'Senden', command = send, height = 1, width = 7)
-    sendButton = tkinter.Button(top, text='Verlassen', command = cleanAndClose, height = 1, width = 7)
+
+    sendimg=tkinter.PhotoImage('send-button.png')
+    Resize_Image(sendimg, 400)
+    sendButton = tkinter.Button(top, image = sendimg, command = send)
+
+
+
+
+
+    leaveButton = tkinter.Button(top, text='Verlassen', command = cleanAndClose, height = 1, width = 7)
     sendButton.pack()
+    leaveButton.pack()
 
     top.protocol("WM_DELETE_WINDOW", cleanAndClose)
 
