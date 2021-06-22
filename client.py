@@ -2,10 +2,6 @@ import tkinter
 from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
 
-"""
-The below function gets the latest messages from the server and inserts it into the Listbox object.
-If the window has somehow been closed abruptly, we remove the user.
-"""
 def receive():
     stop = False
     while True and not stop:
@@ -31,13 +27,7 @@ def cleanAndClose(event=None):
     top.destroy()
     stop = True
 
-def Resize_Image(image, maxsize):
-    r1 = tk.image.size[0]/maxsize[0]
-    r2 = tk.image.size[1]/maxsize[1]
-    ratio = max(r1, r2)
-    newsize = (int(tk.image.size[0]/ratio), int(tk.image.size[1]/ratio))
-    image = tk.image.resize(newsize, tk.Image.ANTIALIAS)
-    return image
+
 
 if __name__ == '__main__':
     top = tkinter.Tk()
@@ -57,13 +47,8 @@ if __name__ == '__main__':
     entryField.bind("<Return>", send)
     entryField.pack()
 
-    sendimg=tkinter.PhotoImage('send-button.png')
-    Resize_Image(sendimg, 400)
-    sendButton = tkinter.Button(top, image = sendimg, command = send)
-
-
-
-
+    bildsende= tkinter.PhotoImage(file='send-button.png')
+    sendButton = tkinter.Button(top, image=bildsende, command = send)
 
     leaveButton = tkinter.Button(top, text='Verlassen', command = cleanAndClose, height = 1, width = 7)
     sendButton.pack()
